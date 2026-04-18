@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-soil-900 bg-saffron-50 antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(238, 118, 18, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(68, 136, 64, 0.06) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-saffron-50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-saffron-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-saffron-400;
+  }
+}
+
+@layer components {
+  /* ── Buttons ─────────────────────────────────────────────── */
+  .btn-primary {
+    @apply bg-saffron-500 hover:bg-saffron-600 text-white font-medium px-5 py-2.5
+           rounded-xl transition-all duration-200 shadow-sm hover:shadow-md
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-saffron-50 text-saffron-700 font-medium px-5 py-2.5
+           rounded-xl border border-saffron-200 transition-all duration-200 shadow-sm
+           hover:border-saffron-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2
+           rounded-xl transition-all duration-200 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-soil-600 hover:text-saffron-600 hover:bg-saffron-50 font-medium px-3 py-2
+           rounded-lg transition-all duration-150;
+  }
+
+  /* ── Cards ───────────────────────────────────────────────── */
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-saffron-100 p-5
+           transition-shadow duration-200 hover:shadow-md;
+  }
+
+  /* ── Form Inputs ─────────────────────────────────────────── */
+  .input {
+    @apply w-full px-4 py-3 bg-white border border-saffron-200 rounded-xl
+           text-soil-900 placeholder-soil-400 font-body
+           focus:outline-none focus:ring-2 focus:ring-saffron-300 focus:border-saffron-400
+           transition-all duration-150 text-sm;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-soil-700 mb-1.5;
+  }
+
+  /* ── Badges ──────────────────────────────────────────────── */
+  .badge-help {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1
+           bg-red-50 text-red-700 rounded-full border border-red-100;
+  }
+
+  .badge-announcement {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1
+           bg-blue-50 text-blue-700 rounded-full border border-blue-100;
+  }
+
+  .badge-suggestion {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1
+           bg-leaf-50 text-leaf-700 rounded-full border border-leaf-100;
+  }
+
+  .badge-admin {
+    @apply inline-flex items-center text-xs font-semibold px-2 py-0.5
+           bg-saffron-100 text-saffron-700 rounded-full;
+  }
+
+  /* ── Page layout ─────────────────────────────────────────── */
+  .page-container {
+    @apply max-w-5xl mx-auto px-4 py-6;
+  }
+
+  /* ── Skeleton loader ─────────────────────────────────────── */
+  .skeleton {
+    @apply bg-saffron-100 animate-pulse rounded-xl;
+  }
+
+  /* ── Divider ─────────────────────────────────────────────── */
+  .divider {
+    @apply border-t border-saffron-100 my-4;
+  }
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease forwards;
+}
+
+.chat-messages {
+  scroll-behavior: smooth;
+}
