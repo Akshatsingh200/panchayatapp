@@ -24,7 +24,10 @@ router.post(
   "/signup",
   [
     body("name").trim().notEmpty().withMessage("Name is required"),
-    body("email").isEmail().withMessage("Valid email is required").normalizeEmail(),
+    body("email")
+      .isEmail()
+      .withMessage("Valid email is required")
+      .normalizeEmail(),
     body("password")
       .isLength({ min: 6 })
       .withMessage("Password must be at least 6 characters"),
@@ -65,14 +68,17 @@ router.post(
       console.error("Signup error:", err);
       res.status(500).json({ message: "Signup failed. Please try again." });
     }
-  }
+  },
 );
 
 // ── POST /api/auth/login ──────────────────────────────────────
 router.post(
   "/login",
   [
-    body("email").isEmail().withMessage("Valid email is required").normalizeEmail(),
+    body("email")
+      .isEmail()
+      .withMessage("Valid email is required")
+      .normalizeEmail(),
     body("password").notEmpty().withMessage("Password is required"),
   ],
   async (req, res) => {
@@ -113,7 +119,7 @@ router.post(
       console.error("Login error:", err);
       res.status(500).json({ message: "Login failed. Please try again." });
     }
-  }
+  },
 );
 
 // ── GET /api/auth/me ──────────────────────────────────────────
@@ -121,7 +127,7 @@ router.get("/me", verifyJWT, async (req, res) => {
   try {
     const user = await User.findById(req.user._id).populate(
       "societyId",
-      "name inviteCode"
+      "name inviteCode",
     );
     res.json({ user });
   } catch (err) {
@@ -134,7 +140,11 @@ router.put(
   "/profile",
   verifyJWT,
   [
-    body("name").optional().trim().notEmpty().withMessage("Name cannot be empty"),
+    body("name")
+      .optional()
+      .trim()
+      .notEmpty()
+      .withMessage("Name cannot be empty"),
     body("bio")
       .optional()
       .isLength({ max: 200 })
@@ -161,7 +171,7 @@ router.put(
     } catch (err) {
       res.status(500).json({ message: "Failed to update profile." });
     }
-  }
+  },
 );
 
 module.exports = router;
