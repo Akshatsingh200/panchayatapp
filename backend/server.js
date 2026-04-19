@@ -41,9 +41,11 @@ app.use((req, _res, next) => {
 // ── Middleware ─────────────────────────────────────────────────
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -73,7 +75,8 @@ registerSocketHandlers(io);
 
 // ── MongoDB Connection + Server Start ─────────────────────────
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/society-connect";
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/society-connect";
 
 mongoose
   .connect(MONGO_URI)
